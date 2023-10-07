@@ -1,0 +1,308 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "src",
+					"jsonFile" : "directory-src-Debug-b6cf2213fc5053b67c22.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src",
+					"targetIndexes" : 
+					[
+						19
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-Debug-b01f6abb0ab61427ef3b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						20,
+						21,
+						22,
+						23,
+						24
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "Assignment2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "byte_stream_capacity::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-byte_stream_capacity-Debug-45306e883c872bab38cf.json",
+					"name" : "byte_stream_capacity",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "byte_stream_construction::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-byte_stream_construction-Debug-11b7eddcd40e98097a46.json",
+					"name" : "byte_stream_construction",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "byte_stream_many_writes::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-byte_stream_many_writes-Debug-f6037379422e1f3486fb.json",
+					"name" : "byte_stream_many_writes",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "byte_stream_one_write::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-byte_stream_one_write-Debug-9c786475b05784041502.json",
+					"name" : "byte_stream_one_write",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "byte_stream_two_writes::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-byte_stream_two_writes-Debug-5d8107171f7e273ffbde.json",
+					"name" : "byte_stream_two_writes",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_cap::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_cap-Debug-c8069f48ea5abc295236.json",
+					"name" : "fsm_stream_reassembler_cap",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_dup::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_dup-Debug-6e8ee9a80942118e2795.json",
+					"name" : "fsm_stream_reassembler_dup",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_holes::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_holes-Debug-e8e9be54d33a6388c4ff.json",
+					"name" : "fsm_stream_reassembler_holes",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_many::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_many-Debug-1077876bd8d3cdd3827e.json",
+					"name" : "fsm_stream_reassembler_many",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_overlapping::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_overlapping-Debug-6d5e5903a97574e3d436.json",
+					"name" : "fsm_stream_reassembler_overlapping",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_seq::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_seq-Debug-88203659c41058ff7286.json",
+					"name" : "fsm_stream_reassembler_seq",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_single::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_single-Debug-7bbea5d26eefbe1b36f1.json",
+					"name" : "fsm_stream_reassembler_single",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fsm_stream_reassembler_win::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-fsm_stream_reassembler_win-Debug-18240febce1dec092c58.json",
+					"name" : "fsm_stream_reassembler_win",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_close::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_close-Debug-3849d57e668eef6efad6.json",
+					"name" : "recv_close",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_connect::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_connect-Debug-12e19b7eb6775c66e856.json",
+					"name" : "recv_connect",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_reorder::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_reorder-Debug-f4870ab4704713884bcd.json",
+					"name" : "recv_reorder",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_special::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_special-Debug-d0e8ff8a5cf8847c55bc.json",
+					"name" : "recv_special",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_transmit::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_transmit-Debug-b7e83e13262fb4fae2a5.json",
+					"name" : "recv_transmit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "recv_window::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-recv_window-Debug-dcf9cfe6edcde83b7fa4.json",
+					"name" : "recv_window",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "tcp_reciever::@145eef247bfb46b6828c",
+					"jsonFile" : "target-tcp_reciever-Debug-d39fa3a07b84ab3a4de0.json",
+					"name" : "tcp_reciever",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "tcp_reciever_checks::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-tcp_reciever_checks-Debug-01d22a489f3cd5790113.json",
+					"name" : "tcp_reciever_checks",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "wrapping_integers_cmp::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-wrapping_integers_cmp-Debug-8ca1a2c15dab6d1dcf03.json",
+					"name" : "wrapping_integers_cmp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "wrapping_integers_roundtrip::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-wrapping_integers_roundtrip-Debug-d29ef0996643dac69abb.json",
+					"name" : "wrapping_integers_roundtrip",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "wrapping_integers_unwrap::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-wrapping_integers_unwrap-Debug-9c4ad4b2a702f87ca1ef.json",
+					"name" : "wrapping_integers_unwrap",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "wrapping_integers_wrap::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-wrapping_integers_wrap-Debug-7faec0025213890674b6.json",
+					"name" : "wrapping_integers_wrap",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/priyash7/Desktop/assignment2/build",
+		"source" : "/home/priyash7/Desktop/assignment2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
