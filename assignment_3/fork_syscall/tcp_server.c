@@ -73,15 +73,13 @@ int main(){
 
     printf("Client connected\n");
 
-    char buffer[1024];
+    close(server_fd);
+    char buffer[1000];
     for(int i=0;i<20;i++){
         bzero(buffer, sizeof(buffer));
-        int read_status = read(client_fd, buffer, sizeof(buffer));
+        read(client_fd, buffer, sizeof(buffer));
 
-        if(read_status < 0){
-            perror("Read failed");
-            exit(EXIT_FAILURE);
-        }
+       
 
         printf("Client sent: %s\n", buffer);
 
@@ -89,18 +87,11 @@ int main(){
 
         long long int result = factorial(n);
 
-        char result_str[1024];
+        char result_str[1000];
 
         sprintf(result_str, "%lld", result);
-
-        int write_status = write(client_fd, result_str, sizeof(result_str));
-
-        if(write_status < 0){
-            perror("Write failed");
-            exit(EXIT_FAILURE);
-        }
-
-        printf("Result sent to client\n");
+        printf("Writing to client: %s\n", result_str);
+        write(client_fd, result_str, sizeof(result_str));
     }
 
 
@@ -109,13 +100,6 @@ int main(){
     close(client_fd);
 
     close(server_fd);
-
-
-
-
-
-
-
 
 
     return 0;
