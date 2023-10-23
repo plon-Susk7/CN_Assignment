@@ -60,42 +60,50 @@ int main(){
     printf("Server listening on port 8080\n");
     printf("Waiting for client...\n");
 
-    struct sockaddr_in client_addr;
 
-    socklen_t client_addr_len = sizeof(client_addr);
+    int client_fd;
 
-    int client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+    for(int z=0;z<10;z++){
+        struct sockaddr_in client_addr;
 
-    if(client_fd < 0){
-        perror("Accept failed");
-        exit(EXIT_FAILURE);
+        socklen_t client_addr_len = sizeof(client_addr);
+
+        client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+
+        if(client_fd < 0){
+            perror("Accept failed");
+            exit(EXIT_FAILURE);
+        }
+
+        printf("Client connected\n");
+
+        if(fork() == 0){
+        
+            close(server_fd);
+            char buffer[1000];
+            for(int i=0;i<20;i++){
+                bzero(buffer, sizeof(buffer));
+                read(client_fd, buffer, sizeof(buffer));
+
+            
+
+                printf("Client sent: %s\n", buffer);
+
+                int n = atoi(buffer);
+
+                long long int result = factorial(n);
+
+                char result_str[1000];
+
+                sprintf(result_str, "%lld", result);
+                printf("Writing to client: %s\n", result_str);
+                write(client_fd, result_str, sizeof(result_str));
+            }
+            exit(0);
+        }
+
+
     }
-
-    printf("Client connected\n");
-
-    close(server_fd);
-    char buffer[1000];
-    for(int i=0;i<20;i++){
-        bzero(buffer, sizeof(buffer));
-        read(client_fd, buffer, sizeof(buffer));
-
-       
-
-        printf("Client sent: %s\n", buffer);
-
-        int n = atoi(buffer);
-
-        long long int result = factorial(n);
-
-        char result_str[1000];
-
-        sprintf(result_str, "%lld", result);
-        printf("Writing to client: %s\n", result_str);
-        write(client_fd, result_str, sizeof(result_str));
-    }
-
-
-   
 
     close(client_fd);
 
