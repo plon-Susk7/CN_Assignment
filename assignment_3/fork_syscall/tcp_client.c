@@ -8,63 +8,76 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-
-void *getFactorial(void *arg){
+void *threadFunctionToHandleServer(void *arg){
 
     char* address = "127.0.0.1";
 
-    struct sockaddr_in server_addr;
+    // Server Socket
+    struct sockaddr_in server_sockaddr_in;
+    
+    server_sockaddr_in.sin_family = AF_INET;
+    server_sockaddr_in.sin_port = htons(8080);
+    server_sockaddr_in.sin_addr.s_addr = inet_addr(address);
 
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(8080);
-    server_addr.sin_addr.s_addr = inet_addr(address);
 
-    int client_fd = socket(AF_INET, SOCK_STREAM, 0);
+    int client_socket_fd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if(client_fd < 0){
-        perror("Socket creation failed");
-        exit(EXIT_FAILURE);
+    if (client_socket_fd < 0){
+        perror("Failed to Create Client Socket");
+        exit(0);
     }
 
-    int connect_status = connect(client_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    // Connect to Server
+    int connect_response = connect(client_socket_fd, (struct sockaddr*)&server_sockaddr_in, sizeof(server_sockaddr_in));
 
-    if(connect_status < 0){
-        perror("Connection failed");
-        exit(EXIT_FAILURE);
+    if (connect_response == -1){
+        printf("Failed to Connect to Server");
+        exit(0);
     }
 
-    printf("Connected to server\n");
+    int i = 1;
 
-    int i =1;
-
-    while(i<=20){
-        printf("Sending %d\n", i);
+    while (i<=20){
+        printf("Waiting for Server to Send Data \n");
         
+        // Send Message
         char message[1000];
-        snprintf(message, 1000,"%d", i);
-        write(client_fd, message, sizeof(message));
+        snprintf(message, 1000, "%d", i);
+        printf("Sending Message: %s \n", message);
+        write(client_socket_fd, message, sizeof(message));
 
+        // Receive Message
         char buffer[1000];
-        read(client_fd, buffer, sizeof(buffer));
-        printf("Received %s\n", buffer);
+        read(client_socket_fd, buffer, 1000);
+        printf("Received from Server: %s \n", buffer);
+        printf("\n");
 
         i++;
     }
 
-    close(client_fd);
+    // Close Socket
+    close(client_socket_fd);
+
+    return NULL;    
 
 }
 
 int main(){
 
-    pthread_t thread_id[10];
+    pthread_t clientThreadArray[500];
 
-    for(int i=0;i<10;i++){
-        pthread_create(&thread_id[i], NULL, getFactorial, NULL);
+    int t = 0;
+
+    while (t<500){
+        pthread_create(&clientThreadArray[t], NULL, threadFunctionToHandleServer, NULL);
+        t++;
     }
 
-    for(int i=0;i<10;i++){
-        pthread_join(thread_id[i], NULL);
+    t = 0;
+
+    while (t<500){
+        pthread_join(clientThreadArray[t], NULL);
+        t++;
     }
     
     return 0;
