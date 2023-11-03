@@ -35,20 +35,22 @@ void *getFactorial(void *arg){
 
     printf("Connected to server\n");
 
-    int i =1;
+    
+    for(int j=0;j<10;j++){
+        int i =1;
+        while(i<=20){
+            printf("Sending %d\n", i);
+            
+            char message[1000];
+            snprintf(message, 1000,"%d", i);
+            write(client_fd, message, sizeof(message));
 
-    while(i<=20){
-        printf("Sending %d\n", i);
-        
-        char message[1000];
-        snprintf(message, 1000,"%d", i);
-        write(client_fd, message, sizeof(message));
+            char buffer[1000];
+            read(client_fd, buffer, sizeof(buffer));
+            printf("Received %s\n", buffer);
 
-        char buffer[1000];
-        read(client_fd, buffer, sizeof(buffer));
-        printf("Received %s\n", buffer);
-
-        i++;
+            i++;
+        }
     }
 
     close(client_fd);
