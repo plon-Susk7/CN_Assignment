@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <sys/wait.h>
+#include <sys/select.h>
 
 #define PORT 8080
 #define MAX_CONNECTIONS 4000
@@ -61,26 +61,34 @@ int main() {
     listen(server_socket, MAX_CONNECTIONS);
     puts("Server listening");
 
-    c = sizeof(struct sockaddr_in);
+    fd_set read_fds;
+    int max_fd = server_socket;
+    FD_ZERO(&read_fds);
+    FD_SET(server_socket, &read_fds);
 
     while (1) {
-        client_socket = accept(server_socket, (struct sockaddr *)&client, (socklen_t *)&c);
-        if (client_socket < 0) {
-            perror("Accept failed");
-            return 1;
-        }
+        fd_set active_fds = read_fds;
+        int num_ready_fds = select(max_fd + 1, &active_fds, NULL, NULL, NULL);
 
-        int pid = fork();
+        for (int i = 0; i <= max_fd && num_ready_fds > 0; i++) {
+            if (FD_ISSET(i, &active_fds)) {
+                num_ready_fds--;
 
-        if (pid == 0) {  // Child process
-            close(server_socket);  // Close server socket in child process
-            handle_client(client_socket);
-            exit(0);
-        } else if (pid < 0) {
-            perror("Fork failed");
-            return 1;
-        } else {  // Parent process
-            close(client_socket);  // Close client socket in parent process
+                if (i == server_socket) {
+                    client_socket = accept(server_socket, (struct sockaddr *)&client, (socklen_t *)&c);
+                    FD_SET(client_socket, &read_fds);
+
+                    if (client_socket > max_fd) {
+                        max_fd = client_socket;
+                    }
+
+                    printf("Client connected\n");
+                } else {
+                    handle_client(i);
+                    close(i);
+                    FD_CLR(i, &read_fds);
+                }
+            }
         }
     }
 

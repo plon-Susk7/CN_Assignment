@@ -4,10 +4,11 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <sys/wait.h>
+#include <sys/epoll.h>
 
 #define PORT 8080
 #define MAX_CONNECTIONS 4000
+#define MAX_EVENTS 100
 
 void handle_client(int client_socket) {
     char client_message[2000];
@@ -61,26 +62,30 @@ int main() {
     listen(server_socket, MAX_CONNECTIONS);
     puts("Server listening");
 
-    c = sizeof(struct sockaddr_in);
+    int epoll_fd = epoll_create(MAX_EVENTS);
+    struct epoll_event event;
+    event.data.fd = server_socket;
+    event.events = EPOLLIN;
+    epoll_ctl(epoll_fd, EPOLL_CTL_ADD, server_socket, &event);
+
+    struct epoll_event events[MAX_EVENTS];
 
     while (1) {
-        client_socket = accept(server_socket, (struct sockaddr *)&client, (socklen_t *)&c);
-        if (client_socket < 0) {
-            perror("Accept failed");
-            return 1;
-        }
+        int num_events = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
 
-        int pid = fork();
+        for (int i = 0; i < num_events; i++) {
+            if (events[i].data.fd == server_socket) {
+                client_socket = accept(server_socket, (struct sockaddr *)&client, (socklen_t *)&c);
 
-        if (pid == 0) {  // Child process
-            close(server_socket);  // Close server socket in child process
-            handle_client(client_socket);
-            exit(0);
-        } else if (pid < 0) {
-            perror("Fork failed");
-            return 1;
-        } else {  // Parent process
-            close(client_socket);  // Close client socket in parent process
+                event.data.fd = client_socket;
+                event.events = EPOLLIN;
+                epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_socket, &event);
+
+                printf("Client connected\n");
+            } else {
+                handle_client(events[i].data.fd);
+                epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, NULL);
+            }
         }
     }
 
